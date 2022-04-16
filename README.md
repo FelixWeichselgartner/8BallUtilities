@@ -7,4 +7,11 @@ Features:
 * `TeamPicker.py`: Random Team Generator (useful if you have more than 4 players)
 * `RatingSystem.py`: Elo rating system for all players
     * `match_history.txt`: `AB vs CD = W L`, where A, B, C and D are initials of players. Before vs is one team and after vs is one team. After = is the game outcome. The first outcome is for Team 1, the second for Team 2. W means win, L means lose.
+<<<<<<< HEAD
 * `TeamWinrates.py`: Outputs overall winrates, best teams sorted and the best 5 teams sorted.
+=======
+
+## License
+
+GNU General Public License Version 3, see [License](./License.md)
+>>>>>>> 7b5cfdbb032a0ed50704aa175dda29a86f6a4422
