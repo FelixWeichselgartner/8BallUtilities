@@ -84,4 +84,9 @@ with open('match_history.txt') as history:
 
         match_counter += 1
 
-
+print('==================')
+for i in players.keys():
+    players[i] = int(players[i])
+print()
+print(f'After Match {match_counter} with {line} player ratings are:')
+print(players)
