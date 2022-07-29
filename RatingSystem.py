@@ -73,6 +73,22 @@ with open('match_history.txt') as history:
         delta2 += temp2 - old_player2
         delta4 += temp4 - old_player4
 
+
+        # Toni mode
+        # for less frustration
+        # on average win more than you lose
+        # set this on 1 for normal behaviour
+        factor = 0.9
+        if delta1 < 0:
+            delta1 = delta1 * factor
+        if delta2 < 0:
+            delta2 = delta2 * factor
+        if delta3 < 0:
+            delta3 = delta3 * factor
+        if delta4 < 0:
+            delta4 = delta4 * factor
+
+
         players[player1] += delta1
         players[player2] += delta2
         players[player3] += delta3
