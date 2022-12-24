@@ -3,7 +3,16 @@ import random
 
 teammates = ['Eva', 'Lukas', 'Dani', 'Toni', 'Felix', 'Manu', 'Johanna', 'Laura', 'Lisa', 'Jakob', 'Simon', 'Lohbi', 'Basti']
 random.shuffle(teammates)
-amount_of_games = 26
+
+individual_games = 8
+amount_of_games = len(teammates) * individual_games / 4
+amount_of_games_int = int(amount_of_games)
+while amount_of_games != float(amount_of_games_int):
+    individual_games += 1
+    amount_of_games = len(teammates) * individual_games / 4
+    amount_of_games_int = int(amount_of_games)
+amount_of_games = amount_of_games_int
+
 print(f'creating {amount_of_games} games')
 
 
