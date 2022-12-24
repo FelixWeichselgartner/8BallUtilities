@@ -1,44 +1,63 @@
 import random
 
-teammates = ['Eva', 'Lukas', 'Dani', 'Toni', 'Felix']
 
-def gen_team():
+teammates = ['Eva', 'Lukas', 'Dani', 'Toni', 'Felix', 'Manu', 'Johanna', 'Laura', 'Lisa', 'Jakob', 'Simon', 'Lohbi', 'Basti']
+random.shuffle(teammates)
+amount_of_games = 26
+print(f'creating {amount_of_games} games')
+
+
+def gen_team(least):
     global teammates
     team = teammates.copy()
-    while len(team) > 4:
-        n = random.randint(0, len(teammates) - 1)
-        out_for_this_round = team.pop(n)
-    return team
 
-amount_of_games = len(teammates)**2
+    if least != None:
+        if len(least) == 4:
+            return least
+        
+        while len(team) > 4 - len(least):
+            n = random.randint(0, len(team) - 1)
+            out_for_this_round = team.pop(n)
+        return team + least
+    else:      
+        while len(team) > 4:
+            n = random.randint(0, len(team) - 1)
+            out_for_this_round = team.pop(n)
+        return team
+
+
+def find_least_selected_players(amount):
+    indices = [i for i, x in enumerate(amount) if x == min(amount)]
+    random.shuffle(indices)
+    selected_indices = indices[:4]
+    selected_players = list()
+    for s in selected_indices:
+        selected_players.append(teammates[s])
+    return selected_players
+
 
 def gen_all_teams():
     amount = list([0] * len(teammates))
     all_teams = list()
+    least = None
     for i in range(amount_of_games):
-        all_teams.append(gen_team())
-
-    for thisteam in all_teams:
-        for p in thisteam:
+        new_team = gen_team(least)
+        random.shuffle(new_team)
+        for p in new_team:
             for i in range(len(teammates)):
                 if p == teammates[i]:
                     amount[i] += 1
-    
-    same_amount = True
-    value = amount[0]
-    for i in range(1, len(teammates)):
-        same_amount = same_amount and (value == amount[i])
+        all_teams.append(new_team)
+        least = find_least_selected_players(amount)
 
-    if same_amount:
-        print(teammates)
-        print(amount)
-        print('===================')
-        print()
-        for i in range(amount_of_games):
-            oneteam = all_teams[i].copy()
-            random.shuffle(oneteam)
-            print(f'{oneteam[0]}, {oneteam[1]} vs {oneteam[2]}, {oneteam[3]}')
-        exit()
+    print(teammates)
+    print(amount)
+    print('===================')
+    print()
+    for i in range(amount_of_games):
+        oneteam = all_teams[i].copy()
+        random.shuffle(oneteam)
+        print(f'{oneteam[0]}, {oneteam[1]} vs {oneteam[2]}, {oneteam[3]}')
 
-while True:
-    gen_all_teams()
+
+gen_all_teams()
