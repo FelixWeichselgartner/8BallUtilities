@@ -23,6 +23,9 @@ def gen_team(least):
     if least != None:
         if len(least) == 4:
             return least
+
+        # remove least from team, noone is playing with/against himself/herself.
+        team = [i for i in team if i not in least]
         
         while len(team) > 4 - len(least):
             n = random.randint(0, len(team) - 1)
