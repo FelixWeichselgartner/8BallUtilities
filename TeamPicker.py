@@ -1,6 +1,5 @@
 import random
 
-
 teammates = ['Eva', 'Lukas', 'Dani', 'Toni', 'Felix', 'Manu', 'Johanna', 'Laura', 'Lisa', 'Jakob', 'Simon', 'Lohbi', 'Basti']
 random.shuffle(teammates)
 
@@ -39,13 +38,18 @@ def gen_team(least):
 
 
 def find_least_selected_players(amount):
-    indices = [i for i, x in enumerate(amount) if x == min(amount)]
-    random.shuffle(indices)
-    selected_indices = indices[:4]
-    selected_players = list()
-    for s in selected_indices:
-        selected_players.append(teammates[s])
+    min_amount = min(amount)
+    indices = [i for i, x in enumerate(amount) if x == min_amount]
+    selected_indices = random.sample(indices, min(4, len(indices)))
+    selected_players = [teammates[i] for i in selected_indices]
     return selected_players
+
+
+def check_duplicates(lst):
+    for item in lst:
+        if lst.count(item) > 1:
+            return True
+    return False
 
 
 def gen_all_teams():
@@ -68,6 +72,9 @@ def gen_all_teams():
     print()
     for i in range(amount_of_games):
         oneteam = all_teams[i].copy()
+        if check_duplicates(oneteam):
+            print('error in code')
+            exit()
         random.shuffle(oneteam)
         print(f'{oneteam[0]}, {oneteam[1]} vs {oneteam[2]}, {oneteam[3]}')
 
